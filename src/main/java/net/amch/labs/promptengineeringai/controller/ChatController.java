@@ -1,5 +1,6 @@
 package net.amch.labs.promptengineeringai.controller;
 
+import net.amch.labs.promptengineeringai.model.Invoice;
 import net.amch.labs.promptengineeringai.model.SpringVersion;
 import net.amch.labs.promptengineeringai.model.Team;
 import org.springframework.ai.chat.client.ChatClient;
@@ -54,7 +55,7 @@ public class ChatController {
     }
 
     @GetMapping(value = "ocr", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<SpringVersion> ocr()  {
+    public Invoice ocr()  {
 
         var userMessageText = """
                 Analyse cette facture et donne-moi la liste des articles avec leurs prix et quantités.              
@@ -65,8 +66,7 @@ public class ChatController {
         return chatClient.prompt()
                 .messages(userMessage)
                 .call()
-                .entity(new ParameterizedTypeReference<>() {
-                });
+                .entity(Invoice.class);
 
     }
 }
