@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
 
-    @Value("classpath:images/example.png")
+    @Value("classpath:images/facture.jpeg")
     private Resource imageResource;
     private final ChatClient chatClient;
 
@@ -32,19 +33,20 @@ public class ChatController {
 
 
     @GetMapping(value = "football", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Team chatEntity(@RequestParam String question) {
+    public Team chatEntity(@RequestParam("year") String year) {
+
+
         return chatClient.prompt()
                 .system("""
                         Donne-moi l'équipe qui a gagné la Coupe du Monde de football de l'année indiquée.
                         """)
-                .user(question)
+                .user(year)
                 .call()
                 .entity(Team.class);
     }
 
     @GetMapping(value = "spring", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SpringVersion> chatEntityList() {
-
         return chatClient.prompt()
                 .system("""
                         Donne-moi toutes les versions du Spring Framework.

@@ -14,12 +14,12 @@ public class OpenApiTest {
 
     @Test
     void testOpenAiApi(){
-        var openAiApi = new OpenAiApi(System.getenv("open-ai-api-key"));
+        var openAiApi = new OpenAiApi(System.getenv("OPENAI_API_KEY"));
         var chatModel= new OpenAiChatModel(openAiApi, OpenAiChatOptions
                 .builder()
                 .withMaxTokens(1000)
                 .withTemperature(0F)
-                .withModel("gpt-3.5-turbo")
+                .withModel("gpt-4o")
                 .build());
         Prompt zeroShotPrompt = getPrompt();
         var chatResponse = chatModel.call(zeroShotPrompt);
@@ -31,6 +31,7 @@ public class OpenApiTest {
                Donne moi l'équipe qui a gagner la coupe du monde du foot de l'année qui sera fournie
                Je veux le résultat au format json sous la forme suivante:
                - Nom de l'équipe 
+               - Entraîneur
                - La liste des joueurs
                - le pays organisateur
                 """);
