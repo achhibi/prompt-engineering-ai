@@ -1,4 +1,4 @@
-package net.amch.labs.promptengineeringai.model;
+package net.amch.labs.promptengineeringai.usecases.model;
 
 public record Person(String firstName, String lastName, int age, String profession) {
 }

@@ -1,0 +1,1 @@
+ Donne-moi l'équipe qui a gagné la Coupe du Monde de football de l'année {year}.
